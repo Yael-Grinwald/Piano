@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<script src="Jqurey/jquery-3.3.1.min.js"></script>
+<style>
+    #n, #n_do{
+        position:absolute;
+    }
+    img{
+        margin-left:5px;
+    }
+    #keyboards {
+        display: flex;
+        position: absolute;
+        bottom: 50px;
+        left: 500px;
+    }
+</style>
+<html>
+<body>
+
+    <canvas id="lines" width="1500" height="300"
+            style="color:black; margin-top:60px;">      
+    </canvas>
+    <canvas id="n"  width="80" height="100"
+            style="color:black;">
+
+    </canvas>
+    <canvas id="n_do" width="80" height="100"
+            style="color:black;"></canvas>
+    <div id="keyboards" width="1500" height="300">
+        <div  width="50" height="300" >
+           <img id="do" src="תווים/piano2.jpg" onclick="note()"/>              
+        </div>
+        <div   width="50" height="300">
+            <img id="re" src="תווים/piano1.jpg" onclick="note()"/>
+        </div>
+        <div   width="100" height="300">
+            <img id="mi" src="תווים/piano2.jpg" onclick="note()"/>
+        </div>
+        <div  width="100" height="300">
+            <img id="fa" src="תווים/piano2.jpg" onclick="note()" />
+        </div>
+        <div   width="100" height="300">
+            <img id="sol" src="תווים/piano2.jpg" onclick="note()"/>
+        </div>
+        <div   width="100" height="300">
+            <img id="la" src="תווים/piano2.jpg" onclick="note()" />
+        </div>
+        <div   width="100" height="300">
+            <img id="si" src="תווים/piano1.jpg" onclick="note()" />
+        </div>
+        <div   width="100" height="300">
+            <img id="do2" src="תווים/piano2.jpg" onclick="note()" />
+        </div>
+    </div>
+    <audio id="do_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/C4.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="re_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/D4.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="mi_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/E4.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="fa_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/F4.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sol_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/G4.mp3" type="audio/mpeg" />
+    </audio>
+    <audio  id="la_">
+        <source src="%d7%aa%d7%95%d7%95%d7%99%d7%9d/A4.mp3" type="audio/mpeg" />
+    </audio>
+
+
+    <script>
+        function lines() {
+            var canvas = document.getElementById("lines");
+            var ctx = canvas.getContext("2d");
+            ctx.moveTo(0, 50);
+            ctx.lineTo(1500, 50);
+
+            ctx.moveTo(0, 90);
+            ctx.lineTo(1500, 90);
+
+            ctx.moveTo(0, 130);
+            ctx.lineTo(1500, 130);
+
+            ctx.moveTo(0, 170);
+            ctx.lineTo(1500, 170);
+
+            ctx.moveTo(0, 210);
+            ctx.lineTo(1500, 210);
+
+            ctx.strokeStyle = "black";
+
+            ctx.stroke();
+        }
+        
+        function notes() {//יוצר את התווים
+            var canvas = document.getElementById("n");
+            var ctx = canvas.getContext("2d"); 
+            ctx.fillStyle = "black"; 
+            ctx.arc(40, 75, 17, 0, 5 * Math.PI);
+           
+            
+            ctx.moveTo(56, 0);
+            ctx.lineTo(56, 81);
+            ctx.stroke();
+            r = 2;
+
+        }
+        function note_do() {//יוצר את התו דו
+            var canvas = document.getElementById("n_do");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = "black";
+            ctx.arc(40, 75, 17, 0, 5 * Math.PI);
+                ctx.moveTo(6, 74);
+                ctx.lineTo(75, 74);
+
+            ctx.moveTo(56, 0);
+            ctx.lineTo(56, 81);
+            ctx.stroke();
+        }
+        lines();
+        notes();
+        note_do();
+        $("#n").hide();//הסתרת התווים
+        $("#n_do").hide();
+
+        function a(x, y, name) {//הצגת התו המבוקש ע"י פונקציה
+            $(name).css("top", y);
+            $(name).css("right", x);
+            $(name).show();
+        }
+
+        function note() {
+            var x = event.target;
+            $("#n_do").hide();
+            $("#n").hide();
+            if (x.id =="do")
+            {
+                a("1000px", "260px", "#n_do");  
+                var p = document.getElementById("do_");
+                p.play();
+            }
+            else {
+                if (x.id == "re") {
+                    a("900px", "220px", "#n"); 
+                    var p = document.getElementById("re_");
+                    p.play();
+                }
+                else {
+
+                    if (x.id == "mi") {
+                        a("800px", "205px", "#n");
+                        var p = document.getElementById("mi_");
+                        p.play();
+                    }
+                    else {
+                        if (x.id == "fa") {
+                            a("700px", "185px", "#n");
+                            var p = document.getElementById("fa_");
+                            p.play();
+
+                        }
+                        else {
+                            if (x.id == "sol") {
+                                a("600px", "165px", "#n");
+                                var p = document.getElementById("sol_");
+                                p.play();
+                            }
+                            else {
+                                if (x.id == "la") {
+                                    a("500px", "140px", "#n");
+                                    var p = document.getElementById("la_");
+                                    p.play();
+                                }
+                                else {
+                                    if (x.id == "si") {
+                                        a("400px", "120px", "#n");
+                                        var p = document.getElementById("la_");
+                                        p.play();
+                                    }
+                                    else {
+                                        if (x.id == "do2") {
+                                            a("300px", "100px", "#n");
+                                            var p = document.getElementById("do_");
+                                            p.play();
+                                        }
+                                    }
+                                    
+                                }
+                         
+                            }
+                           
+                        }
+                       
+                    }
+                   
+                }
+            }
+            
+         }
+
+    </script>
+
+</body>
+</html>
